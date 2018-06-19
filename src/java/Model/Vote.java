@@ -5,45 +5,51 @@
  */
 package Model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
  * @author Guillaume
  */
+@Entity
+@Table(name = "votes")
 public class Vote {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
-    private int answerId;
-    private Date creationDate;
     
-    public Vote (int ai, Date cd) {
-        answerId = ai;
-        creationDate = cd;
-    }
+    @ManyToOne
+    @JoinColumn(name = "answer_id", nullable = false)
+    private Answer answer;
+    
+    @Column(name = "created_at")
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
+    private LocalDateTime created_at;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Answer getAnswer() {
+        return answer;
     }
 
-    public int getAnswerId() {
-        return answerId;
-    }
-
-    public void setAnswerId(int answerId) {
-        this.answerId = answerId;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public LocalDateTime getCreatedAt() {
+        return created_at;
     }
     
     

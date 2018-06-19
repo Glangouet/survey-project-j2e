@@ -5,29 +5,46 @@
  */
 package Model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
  * @author Guillaume
  */
+@Entity
+@Table(name = "questions")
 public class Question {
     
-    private int id;
-    private String content;
-    private Date creationDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     
-    public Question (String c, Date d) {
-        content = c;
-        creationDate = d;
-    }
+    @Column(name = "content")
+    private String content;
+    
+    @Column(name = "created_at")
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
+    private LocalDateTime created_at;
+    
+    @OneToMany(mappedBy = "question")
+    private List<Answer> answers = new ArrayList<>();
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getContent() {
@@ -38,14 +55,12 @@ public class Question {
         this.content = content;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public LocalDateTime getCreatedAt() {
+        return created_at;
     }
     
-    
+    public List<Answer> getAnswers() {
+        return answers;
+    }
     
 }

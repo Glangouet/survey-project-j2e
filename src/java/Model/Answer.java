@@ -5,41 +5,56 @@
  */
 package Model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
  * @author Guillaume
  */
+@Entity
+@Table(name = "answers")
 public class Answer {
     
-    private int id;
-    private int questionId;
-    private String content;
-    private int countVote;
-    private Date creationDate;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
     
-    public Answer (int qi, String c, int cv, Date d) {
-        questionId = qi;
-        content = c;
-        countVote = cv;
-        creationDate = d;
-    }
+    @ManyToOne
+    @JoinColumn(name="question_id", nullable = false)
+    private Question question;
+    
+    @Column(name = "content")
+    private String content;
+    
+    @OneToMany(mappedBy = "answer")
+    private List<Vote> votes = new ArrayList<>();
+    
+    @Column(name = "created_at")
+    @Temporal(TemporalType.DATE)
+    @CreationTimestamp
+    private LocalDateTime created_at;
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
+    public Question getQuestion() {
+        return question;
     }
 
     public String getContent() {
@@ -50,22 +65,17 @@ public class Answer {
         this.content = content;
     }
 
-    public int getCountVote() {
-        return countVote;
+    public List<Vote> getVotes() {
+        return votes;
     }
 
-    public void setCountVote(int countVote) {
-        this.countVote = countVote;
+    public LocalDateTime getCreatedAt() {
+        return created_at;
+    }
+    
+    @Override
+    public String toString() {
+        return "Answer: " + this.id;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-    
-    
-    
 }
