@@ -8,7 +8,6 @@
     <f:view contentType="text/html">
         
         
-        
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -21,6 +20,18 @@
         <h:body>
             
             <p:chart type="bar" model="#{chartView.horizontalBarModel}" style="height:300px"/>
+            
+            <p:layout style="min-width:400px;min-height:200px;">
+                <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
+                    West
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    Center
+                </p:layoutUnit>
+            </p:layout>
+            
+            
 
         </h:body>
 
