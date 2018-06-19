@@ -5,7 +5,6 @@
  */
 package Model;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.util.Date;
 
 /**
@@ -16,11 +15,11 @@ public class Answer {
     
     private int id;
     private int questionId;
-    private string content;
+    private String content;
     private int countVote;
     private Date creationDate;
     
-    public Answer (int qi, string c, int cv, Date d) {
+    public Answer (int qi, String c, int cv, Date d) {
         questionId = qi;
         content = c;
         countVote = cv;
@@ -43,11 +42,11 @@ public class Answer {
         this.questionId = questionId;
     }
 
-    public string getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(string content) {
+    public void setContent(String content) {
         this.content = content;
     }
 

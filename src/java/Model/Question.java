@@ -5,7 +5,6 @@
  */
 package Model;
 
-import com.sun.xml.rpc.processor.modeler.j2ee.xml.string;
 import java.util.Date;
 
 /**
@@ -15,10 +14,10 @@ import java.util.Date;
 public class Question {
     
     private int id;
-    private string content;
+    private String content;
     private Date creationDate;
     
-    public Question (string c, Date d) {
+    public Question (String c, Date d) {
         content = c;
         creationDate = d;
     }
@@ -31,11 +30,11 @@ public class Question {
         this.id = id;
     }
 
-    public string getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(string content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
