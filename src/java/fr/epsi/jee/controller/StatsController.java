@@ -5,6 +5,7 @@
  */
 package fr.epsi.jee.controller;
 
+import fr.epsi.jee.dao.QuestionDAO;
 import fr.epsi.jee.model.Question;
 import java.io.IOException;
 import javax.inject.Named;
@@ -14,6 +15,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.omnifaces.cdi.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -27,6 +29,9 @@ public class StatsController implements Serializable {
     @Inject
     @Param
     private Integer uuid;
+    
+    @Autowired
+    private QuestionDAO questionDao;
     
     @Inject
     public StatsController() {
@@ -42,7 +47,7 @@ public class StatsController implements Serializable {
             return null;
         }
         
-        return null;
+        return questionDao.find(uuid);
     }
     
 }
