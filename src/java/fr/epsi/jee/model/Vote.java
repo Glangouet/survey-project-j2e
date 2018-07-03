@@ -5,6 +5,7 @@
  */
 package fr.epsi.jee.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
  */
 @Entity
 @Table(name = "votes")
-public class Vote {
+public class Vote implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

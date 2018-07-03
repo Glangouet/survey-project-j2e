@@ -5,6 +5,7 @@
  */
 package fr.epsi.jee.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import org.hibernate.annotations.CreationTimestamp;
  */
 @Entity
 @Table(name = "answers")
-public class Answer {
+public class Answer implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
