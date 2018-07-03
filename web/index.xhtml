@@ -5,68 +5,47 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <f:view contentType="text/html">
         
         
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>PrimeFaces</title>
+                <title>EPSI Sondages</title>
             </f:facet>
         </h:head>
 
         
         
         <h:body>
-            
-            <p:chart type="bar" model="#{chartView.horizontalBarModel}" style="height:300px"/>
-            
-            <p:layout style="min-width:400px;min-height:200px;">
-                <p:layoutUnit position="west" resizable="true" size="100" minSize="40" maxSize="200">
-                    West
-                </p:layoutUnit>
-
-                <p:layoutUnit position="center">
-                    Center
-                </p:layoutUnit>
-            </p:layout>
-            
-            
-
+            	
+            <ui:composition template="template/common/commonLayout.xhtml">         
+            </ui:composition> 
+                
         </h:body>
 
-        
-        
-    </f:view>
     
     
-<!--            <p:layout fullPage="true">
-
-            <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                Header
-            </p:layoutUnit>
-
-            <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-
-            </p:layoutUnit>
-
-            <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                <p:menu>
-                    <p:submenu label="Resources">
-                        <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                        <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                        <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                        <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                    </p:submenu>
-
-                </p:menu>
-            </p:layoutUnit>
-
-            <p:layoutUnit position="center">
-                Welcome to PrimeFaces
-            </p:layoutUnit>
-
-        </p:layout>-->
 </html>
+
+
+
+
+<!--<h:link outcome="test" value="TASOEUR" />
+
+    <h:form>
+
+            <h:panelGrid id="survey" columns="4" cellpadding="5">
+
+                <h:outputLabel for="name" value="Name:" />
+                <p:inputText id="name" value="#{validationView.text}" required="true" label="Name"/>
+                <p:message for="name" />
+                <h:outputText value="#{validationView.text}" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Ok" update="survey" icon="ui-icon-check" validateClient="true" style="margin-right:10px"/>
+
+    </h:form>
+
+<p:chart type="bar" model="#{chartView.horizontalBarModel}" style="height:300px"/>-->
 
