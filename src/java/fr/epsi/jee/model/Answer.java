@@ -6,7 +6,6 @@
 package fr.epsi.jee.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -18,9 +17,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.CreationTimestamp;
 
 /**
  *
@@ -44,11 +40,6 @@ public class Answer implements Serializable {
     
     @OneToMany(mappedBy = "answer")
     private List<Vote> votes = new ArrayList<>();
-    
-    @Column(name = "created_at")
-    @Temporal(TemporalType.DATE)
-    @CreationTimestamp
-    private LocalDateTime created_at;
 
     public int getId() {
         return id;
@@ -70,10 +61,6 @@ public class Answer implements Serializable {
         return votes;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return created_at;
-    }
-    
     @Override
     public String toString() {
         return "Answer: " + this.id;
