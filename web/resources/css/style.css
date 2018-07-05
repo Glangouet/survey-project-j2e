@@ -3,7 +3,7 @@ html, body, #page
     height: 100vh;
 }
 
-#header *, #footer *, #content *, body
+#header, #footer, #content, body
 {
     padding: 0;
     margin: 0;
@@ -16,7 +16,8 @@ html, body, #page
     background-color: #271549;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    
 }
 
 #imgHeader
@@ -24,15 +25,40 @@ html, body, #page
     height: 80%;
 }
 
+#imgCorner, #imgCorner2
+{
+    height: 100%;
+}
+
 #content
 {
     height: 80vh;
+}
+
+#mainSurvey
+{
+    height: 100%;
+    padding-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+form
+{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }
 
 #footer
 {
     height: 5vh;
     background-color: #271549;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #EFEEF3;
 }
 
 body
