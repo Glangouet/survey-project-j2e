@@ -28,7 +28,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Vote implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
     
@@ -53,5 +53,8 @@ public class Vote implements Serializable {
         return created_at;
     }
     
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
     
 }

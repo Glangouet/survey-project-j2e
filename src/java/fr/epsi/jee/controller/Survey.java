@@ -13,14 +13,14 @@ import java.util.Arrays;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Ludo Renzetti
  */
 @Named(value = "Survey")
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class Survey implements Serializable {
     
@@ -30,7 +30,7 @@ public class Survey implements Serializable {
     
     @PostConstruct
     public void init() {
-        question.getAnswers().addAll(Arrays.asList(
+        question.setAnswers(Arrays.asList(
                 new Answer(),
                 new Answer(),
                 new Answer()
@@ -44,10 +44,8 @@ public class Survey implements Serializable {
     }
     
     public void submitSurvey() {
-        if(question.getAnswers().isEmpty())
-            return;
-        
-        questionService.save(question);
+        if(!question.getAnswers().isEmpty())
+            question = questionService.persist(question);
     }
     
     public void removeAnswer(int index) {
@@ -55,7 +53,7 @@ public class Survey implements Serializable {
     }
     
     public void addAnswer() {
-        question.getAnswers().add(new Answer());
+        question.setAnswer(new Answer());
     }
     
 }

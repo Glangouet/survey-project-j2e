@@ -13,8 +13,10 @@ import fr.epsi.jee.model.Question;
  */
 public interface QuestionDAOInterface {
     
-    public void save(Question q);
+    public Question persist(Question q);
     
-    public Question find(Integer uuid);
+    public Question save(Question q);
+    
+    public Question find(Long uuid);
     
 }

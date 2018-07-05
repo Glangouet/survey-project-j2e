@@ -31,9 +31,9 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Question implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @Column(name = "content")
     private String content;
@@ -43,10 +43,10 @@ public class Question implements Serializable {
     @CreationTimestamp
     private Date created_at;
     
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "question", fetch = FetchType.EAGER)
     private List<Answer> answers = new ArrayList<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
@@ -64,6 +64,15 @@ public class Question implements Serializable {
     
     public List<Answer> getAnswers() {
         return answers;
+    }
+    
+    public void setAnswers(List<Answer> answers) {
+        answers.forEach((a) -> setAnswer(a));
+    }
+    
+    public void setAnswer(Answer answer) {
+        answers.add(answer);
+        answer.setQuestion(this);
     }
     
 }

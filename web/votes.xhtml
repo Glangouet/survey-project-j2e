@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui">
+    
+    <f:view contentType="text/html">
+        <h:head>
+            <title>EPSI Strawpoll | Vote !</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        </h:head>
+        
+        <h:body>
+            <ui:composition template="template/common/commonLayout.xhtml"> 
+                <ui:define name="content">
+                    <h1>#{surveyItem.question.content}</h1>
+                    <o:form includeRequestParams="true">
+                        <ui:repeat value="#{surveyItem.question.answers}" var="answer" varStatus="answerStatus">
+                            <span>#{answer.content}</span>
+                            <p:commandButton value="Vote !" actionListener="#{surveyItem.vote(answerStatus.index)}" async="true" ajax="true" update="@form">
+                                <f:attribute name="uuid" value="#{surveyItem.question.id}"/>
+                            </p:commandButton>
+                            <br />
+                        </ui:repeat>
+                    </o:form>
+                </ui:define>
+            </ui:composition>
+        </h:body>
+    </f:view>
+    
+</html>

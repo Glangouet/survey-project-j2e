@@ -8,6 +8,7 @@ package fr.epsi.jee.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -28,9 +29,9 @@ import javax.persistence.Table;
 public class Answer implements Serializable {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     
     @ManyToOne
     @JoinColumn(name="question_id", nullable = false)
@@ -39,17 +40,17 @@ public class Answer implements Serializable {
     @Column(name = "content")
     private String content;
     
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "answer", fetch = FetchType.EAGER)
     private List<Vote> votes = new ArrayList<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-
+    
     public Question getQuestion() {
         return question;
     }
-
+    
     public String getContent() {
         return content;
     }
@@ -57,14 +58,18 @@ public class Answer implements Serializable {
     public void setContent(String content) {
         this.content = content;
     }
-
+    
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+    
     public List<Vote> getVotes() {
         return votes;
     }
-
-    @Override
-    public String toString() {
-        return "Answer: " + this.id;
+    
+    public void setVote(Vote vote) {
+        votes.add(vote);
+        vote.setAnswer(this);
     }
 
 }

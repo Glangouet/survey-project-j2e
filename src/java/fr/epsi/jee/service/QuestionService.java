@@ -7,9 +7,6 @@ package fr.epsi.jee.service;
 
 import fr.epsi.jee.dao.QuestionDAOInterface;
 import fr.epsi.jee.model.Question;
-import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -17,18 +14,26 @@ import org.hibernate.criterion.Restrictions;
  */
 public class QuestionService extends DAOService implements QuestionDAOInterface {
     
-    public QuestionService() {
-    }
-    
     @Override
-    public void save(Question q) {
+    public Question persist(Question q) {
         openCurrentSessionwithTransaction();
-        getCurrentSession().save(q);
+        getCurrentSession().persist(q);
         closeCurrentSessionwithTransaction();
+        
+        return q;
     }
     
     @Override
-    public Question find(Integer uuid) {
+    public Question save(Question q) {
+        openCurrentSessionwithTransaction();
+        getCurrentSession().update(q);
+        closeCurrentSessionwithTransaction();
+        
+        return q;
+    }
+    
+    @Override
+    public Question find(Long uuid) {
         openCurrentSession();
         Question q = (Question) getCurrentSession().get(Question.class, uuid);
         closeCurrentSession();
