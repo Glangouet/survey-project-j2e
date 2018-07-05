@@ -14,18 +14,28 @@
         
         <h:body>
             <ui:composition template="template/common/commonLayout.xhtml"> 
+                
                 <ui:define name="content">
-                    <h1>#{surveyItem.question.content}</h1>
-                    <o:form includeRequestParams="true">
-                        <ui:repeat value="#{surveyItem.question.answers}" var="answer" varStatus="answerStatus">
-                            <span>#{answer.content}</span>
-                            <p:commandButton value="Vote !" actionListener="#{surveyItem.vote(answerStatus.index)}" async="true" ajax="true" update="@form">
-                                <f:attribute name="uuid" value="#{surveyItem.question.id}"/>
-                            </p:commandButton>
-                            <br />
-                        </ui:repeat>
-                    </o:form>
+                    <div id="votePage">
+                        <div>
+                        <h1>#{surveyItem.question.content}</h1>
+                        </div>
+
+                        <div id="voteChoices">
+                            <o:form includeRequestParams="true">
+                                    <ui:repeat value="#{surveyItem.question.answers}" var="answer" varStatus="answerStatus">
+                                        <div class="voteSingle">
+                                        <span>#{answer.content}</span>
+                                        <p:commandButton value="Vote !" actionListener="#{surveyItem.vote(answerStatus.index)}" async="true" ajax="true" update="@form">
+                                            <f:attribute name="uuid" value="#{surveyItem.question.id}"/>
+                                        </p:commandButton>
+                                        </div>
+                                    </ui:repeat>
+                            </o:form>
+                        </div>
+                    </div>
                 </ui:define>
+                
             </ui:composition>
         </h:body>
     </f:view>
