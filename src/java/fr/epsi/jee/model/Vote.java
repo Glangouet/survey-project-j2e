@@ -6,7 +6,7 @@
 package fr.epsi.jee.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Vote implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private Date created_at;
 
     public int getId() {
         return id;
@@ -49,7 +49,7 @@ public class Vote implements Serializable {
         return answer;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return created_at;
     }
     

@@ -6,12 +6,14 @@
 package fr.epsi.jee.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
@@ -39,9 +41,9 @@ public class Question implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.DATE)
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private Date created_at;
     
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<Answer> answers = new ArrayList<>();
 
     public int getId() {
@@ -56,7 +58,7 @@ public class Question implements Serializable {
         this.content = content;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public Date getCreatedAt() {
         return created_at;
     }
     

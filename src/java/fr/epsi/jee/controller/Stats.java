@@ -5,17 +5,17 @@
  */
 package fr.epsi.jee.controller;
 
-import fr.epsi.jee.dao.QuestionDAO;
+import fr.epsi.jee.service.QuestionService;
 import fr.epsi.jee.model.Question;
 import java.io.IOException;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import java.io.Serializable;
+import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import org.omnifaces.cdi.Param;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -24,17 +24,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Named(value = "stats")
 @RequestScoped
 @ManagedBean
-public class StatsController implements Serializable {
+@Dependent
+public class Stats implements Serializable {
 
     @Inject
     @Param
     private Integer uuid;
     
-    @Autowired
-    private QuestionDAO questionDao;
+    private QuestionService questionService;
     
     @Inject
-    public StatsController() {
+    public Stats() {
+        questionService = new QuestionService();
     }
     
     public Integer getUUID() {
@@ -42,12 +43,14 @@ public class StatsController implements Serializable {
     }
     
     public Question getQuestion() throws IOException {
-        if(uuid <= 0) {
+        Question q = questionService.find(uuid);
+        
+        if(uuid <= 0 || q == null) {
             FacesContext.getCurrentInstance().getExternalContext().redirect("/");
             return null;
         }
         
-        return questionDao.find(uuid);
+        return q;
     }
     
 }
