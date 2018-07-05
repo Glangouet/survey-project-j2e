@@ -8,12 +8,20 @@ package fr.epsi.jee.controller;
 import fr.epsi.jee.model.Answer;
 import fr.epsi.jee.model.Question;
 import fr.epsi.jee.service.QuestionService;
+import fr.epsi.jee.utils.RedirectUtil;
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -43,9 +51,11 @@ public class Survey implements Serializable {
         return question;
     }
     
-    public void submitSurvey() {
-        if(!question.getAnswers().isEmpty())
+    public void submitSurvey() throws UnsupportedEncodingException {
+        if(!question.getAnswers().isEmpty()) {
             question = questionService.persist(question);
+            RedirectUtil.redirect("/votes.xhtml?id=" + URLEncoder.encode(question.getId().toString(), "UTF-8"));
+        }
     }
     
     public void removeAnswer(int index) {
