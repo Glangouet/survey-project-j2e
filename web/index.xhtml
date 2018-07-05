@@ -6,6 +6,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <f:view contentType="text/html">
+        
         <h:head>
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -14,26 +15,51 @@
         </h:head>
 
         <h:body>
-            <h:form id="form">
-		<h3>Create a new survey</h3>
-                    <h:outputLabel for="content">Your question:</h:outputLabel>
-                    <h:inputText value="#{survey.question.content}" id="content"></h:inputText>
-                    <br/>
-                    <br/>
-                    <ui:repeat value="#{survey.question.answers}" var="answer" varStatus="answerStatus">
-                        <h:outputLabel for="content">Answer #{answerStatus.index + 1}:</h:outputLabel>
-                        <h:inputText value="#{answer.content}" id="answer_#{answerStatus.index + 1}" />
-                        <h:commandButton value="Remove">
-                            <f:ajax listener="#{survey.removeAnswer(answerStatus.index)}" render="@form" />
-                        </h:commandButton>
-                        <br />
-                    </ui:repeat>
+            
+            <ui:composition template="template/common/commonLayout.xhtml">
+                <ui:define name="content">
+                    
+                    <div id="form">
+                        
+                        <h:form id="actualForm">
+                            
+                            <div id="titleSurvey">
+                                <h3>Create a new survey</h3>
+                            </div>
+                            
+                            <div id="questionSurvey">
+                                <h:outputLabel for="content">Your question:</h:outputLabel>
+                                <h:inputText value="#{survey.question.content}" id="content"></h:inputText>
+                            </div>
+                            
+                            <div id="answerSurvey">
+                                <ui:repeat value="#{survey.question.answers}" var="answer" varStatus="answerStatus">
+                                    <h:outputLabel for="content">Answer #{answerStatus.index + 1}:</h:outputLabel>
+                                    <h:inputText value="#{answer.content}" class="answer" id="answer_#{answerStatus.index + 1}" />
+                                    <h:commandButton value="Remove">
+                                        <f:ajax listener="#{survey.removeAnswer(answerStatus.index)}" render="@form" />
+                                    </h:commandButton>
+                                    <br />
+                                </ui:repeat>
 
-                    <h:commandButton value="Add an answer">
-                         <f:ajax listener="#{survey.addAnswer}" render="@form" />
-                    </h:commandButton>
-                    <h:commandButton action="#{survey.submitSurvey}" value="Submit"></h:commandButton>
-            </h:form>
+                                <h:commandButton id="addAnswerButton" value="Add an answer">
+                                    <f:ajax listener="#{survey.addAnswer}" render="@form" />
+                                </h:commandButton>
+                            </div>
+                            
+                            <div id="validateSurvey">
+                                <p:commandButton action="#{survey.submitSurvey}" icon="ui-icon-check" value="Submit"></p:commandButton>
+                            </div>
+                            
+                        </h:form>
+                        
+                    </div>
+                    
+                </ui:define>
+            </ui:composition>
+            
         </h:body>
+        
     </f:view>
+    
 </html>

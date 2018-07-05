@@ -44,10 +44,61 @@ html, body, #page
     align-items: flex-start;
 }
 
-form
+#form
+{
+    display: flex;
+    justify-content: center;
+}
+
+#actualForm
 {
     display: flex;
     flex-flow: column;
+    align-items: center;
+}
+
+#titleSurvey
+{
+    margin: 2vh 2vh 5vh 2vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+#questionSurvey
+{
+    margin-bottom: 3vh;
+    font-family: 'Roboto', sans-serif;
+}
+
+#questionSurvey label
+{
+    margin-right: 1vw;
+}
+
+#answerSurvey label
+{
+    margin-right: 1vw;
+    font-family: 'Roboto', sans-serif;
+}
+
+.answer
+{
+    margin-bottom: 1vh;
+    margin-right: 1vw;
+}
+
+
+#validateSurvey
+{
+    display: flex;
+    flex-flow: column;
+    margin-top: 7vh;
+}
+
+
+#grid
+{
+    background-color: red;
+    display: flex;
     justify-content: center;
 }
 
@@ -59,6 +110,7 @@ form
     align-items: center;
     justify-content: center;
     color: #EFEEF3;
+    font-family: 'Roboto', sans-serif;
 }
 
 body
