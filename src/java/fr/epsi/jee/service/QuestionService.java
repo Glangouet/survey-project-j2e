@@ -7,6 +7,7 @@ package fr.epsi.jee.service;
 
 import fr.epsi.jee.dao.QuestionDAOInterface;
 import fr.epsi.jee.model.Question;
+import org.hibernate.LockMode;
 
 /**
  *
@@ -36,10 +37,11 @@ public class QuestionService extends DAOService implements QuestionDAOInterface 
     public Question find(Long uuid) {
         openCurrentSession();
         Question q = (Question) getCurrentSession().get(Question.class, uuid);
+        getCurrentSession().lock(q, LockMode.NONE);
+        q.getAnswers(); // LAZY
         closeCurrentSession();
         
         return q;
     }
-    
     
 }

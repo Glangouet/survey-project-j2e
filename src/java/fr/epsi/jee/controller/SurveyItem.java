@@ -13,13 +13,9 @@ import fr.epsi.jee.utils.RedirectUtil;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLEncoder;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -44,6 +40,10 @@ public class SurveyItem implements Serializable {
         id = Long.parseLong(rawId);
         
         questionService = new QuestionService();
+    }
+    
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
     
     private void loadQuestion() {
