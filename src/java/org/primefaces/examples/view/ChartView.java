@@ -13,10 +13,12 @@ import org.primefaces.model.chart.ChartSeries;
 @ManagedBean
 public class ChartView implements Serializable {
  
-    private HorizontalBarChartModel horizontalBarModel;
+    public HorizontalBarChartModel horizontalBarModel;
+    
  
     @PostConstruct
     public void init() {
+        
         createBarModels();
     }
      
@@ -25,44 +27,35 @@ public class ChartView implements Serializable {
     }
     
      
-    private void createBarModels() {
+    public void createBarModels() {
         createHorizontalBarModel();
     }
      
      
-    private void createHorizontalBarModel() {
+    public void createHorizontalBarModel() {
         horizontalBarModel = new HorizontalBarChartModel();
- 
+
+
+        
         ChartSeries boys = new ChartSeries();
         boys.setLabel("Boys");
-        boys.set("2004", 50);
-        boys.set("2005", 96);
-        boys.set("2006", 44);
-        boys.set("2007", 55);
-        boys.set("2008", 25);
- 
-        ChartSeries girls = new ChartSeries();
-        girls.setLabel("Girls");
-        girls.set("2004", 52);
-        girls.set("2005", 60);
-        girls.set("2006", 82);
-        girls.set("2007", 35);
-        girls.set("2008", 120);
- 
+        boys.set("Answer 1", 45);
+        boys.set("Answer 2", 30);
+        boys.set("Answer 3", 25);
+
         horizontalBarModel.addSeries(boys);
-        horizontalBarModel.addSeries(girls);
-         
-        horizontalBarModel.setTitle("Horizontal and Stacked");
+
+        horizontalBarModel.setTitle("Survey answers");
         horizontalBarModel.setLegendPosition("e");
         horizontalBarModel.setStacked(true);
          
         Axis xAxis = horizontalBarModel.getAxis(AxisType.X);
-        xAxis.setLabel("Births");
         xAxis.setMin(0);
-        xAxis.setMax(200);
+        xAxis.setMax(100);
          
-        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);
-        yAxis.setLabel("Gender");        
+        Axis yAxis = horizontalBarModel.getAxis(AxisType.Y);   
+        horizontalBarModel.setSeriesColors("5DAD3E,01A2BE,983A84,EF7F33,FEE318,DF2F43");
+        horizontalBarModel.setExtender("chartExtender");
     }
  
 }
