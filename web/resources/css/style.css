@@ -125,3 +125,36 @@ body
 {
     background-color: #EFEEF3;
 }
+
+
+#votePage
+{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 100%;
+}
+
+#votePage h1
+{
+    font-family: 'Roboto', sans-serif;
+}
+
+#voteChoices span
+{
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+    margin-left: 0;
+}
+
+.voteSingle
+{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-radius: 4px 4px 4px 4px;
+    border: 1px dotted #B0B0B0;
+    margin: 1em 1em 1em 1em;
+    padding: 0.5em 0.5em 0.5em 0.5em;
+
+}
